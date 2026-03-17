@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ella Ndalla | Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0A1628;
+      color: #E2E8F0;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== COLOR TOKENS ===== */
+    :root {
+      --navy:       #0A1628;
+      --navy-mid:   #1E2D4A;
+      --navy-light: #253550;
+      --gold:       #D4AF37;
+      --gold-light: #F0D060;
+      --gold-muted: #A88A1E;
+      --text:       #E2E8F0;
+      --text-muted: #94A3B8;
+      --accent:     #4A90D9;
+      --white:      #FFFFFF;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-muted); border-radius: 3px; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10, 22, 40, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .section-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-bottom: 3rem;
+    }
+
+    /* ===== HERO ===== */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-top: 64px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(212,175,55,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 20% 60%, rgba(74,144,217,0.05) 0%, transparent 50%);
+    }
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212,175,55,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.3);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.3); }
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .hero-name span { color: var(--gold); }
+    .hero-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-value-prop {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      line-height: 1.8;
+    }
+    .hero-value-prop strong { color: var(--text); }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-muted));
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212,175,55,0.35);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border: 1px solid rgba(226,232,240,0.25);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+    /* Hero stats */
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(212,175,55,0.15);
+    }
+    .stat-item { text-align: left; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.25rem;
+    }
+
+    /* Hero photo */
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero-photo-frame {
+      position: relative;
+      width: 340px;
+      height: 400px;
+    }
+    .hero-photo-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(74,144,217,0.08));
+      border-radius: 20px;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    .photo-placeholder {
+      position: absolute;
+      inset: 16px;
+      border-radius: 14px;
+      background: linear-gradient(160deg, #1E2D4A 0%, #253550 50%, #1A2840 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(212,175,55,0.15);
+    }
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 14px;
+      filter: contrast(1.05) brightness(0.95) saturate(0.9);
+      display: block;
+    }
+    /* Professional photo overlay effect */
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,22,40,0) 40%,
+        rgba(10,22,40,0.6) 100%
+      );
+      pointer-events: none;
+    }
+    /* If no photo, show initials */
+    .photo-initials {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.8;
+      line-height: 1;
+    }
+    .photo-initials-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    /* Decorative corner */
+    .photo-corner {
+      position: absolute;
+      width: 60px; height: 60px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.5;
+    }
+    .photo-corner-tl { top: -4px; left: -4px; border-width: 3px 0 0 3px; border-radius: 4px 0 0 0; }
+    .photo-corner-br { bottom: -4px; right: -4px; border-width: 0 3px 3px 0; border-radius: 0 0 4px 0; }
+    /* Floating badge on photo */
+    .photo-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--navy-mid);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+    }
+    .photo-badge-icon { font-size: 1.2rem; }
+    .photo-badge-text { font-weight: 600; color: var(--gold); }
+    .photo-badge-sub { font-size: 0.65rem; color: var(--text-muted); }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--navy-mid); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+    .about-text p strong { color: var(--text); }
+    .superpower-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .superpower-card {
+      background: var(--navy);
+      border: 1px solid rgba(212,175,55,0.12);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .superpower-card:hover {
+      border-color: rgba(212,175,55,0.35);
+      transform: translateY(-3px);
+    }
+    .sp-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .sp-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+    .sp-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ===== SKILLS ===== */
+    #skills { background: var(--navy); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--navy-mid);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-group:hover {
+      border-color: rgba(212,175,55,0.3);
+      transform: translateY(-3px);
+    }
+    .skill-group-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .skill-group-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(212,175,55,0.2);
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.18);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    .skill-tag:hover {
+      background: rgba(212,175,55,0.18);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .skill-tag.highlight {
+      background: rgba(212,175,55,0.15);
+      border-color: rgba(212,175,55,0.4);
+      color: var(--gold-light);
+    }
+
+    /* ===== PROJECTS ===== */
+    #projects { background: var(--navy-mid); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+    .projects-grid .project-card:first-child {
+      grid-column: 1 / -1;
+    }
+    .project-card {
+      background: var(--navy);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .project-card:hover {
+      border-color: rgba(212,175,55,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .project-card:hover::before { opacity: 1; }
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .project-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(212,175,55,0.15);
+      line-height: 1;
+    }
+    .project-category {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(212,175,55,0.1);
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+    }
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .project-problem {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.7;
+    }
+    .project-impact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .impact-chip {
+      background: rgba(74,144,217,0.1);
+      border: 1px solid rgba(74,144,217,0.25);
+      color: #93C5FD;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+    }
+    .impact-chip.gold {
+      background: rgba(212,175,55,0.1);
+      border-color: rgba(212,175,55,0.3);
+      color: var(--gold-light);
+    }
+    .project-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .method-tag {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid rgba(212,175,55,0.3);
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .project-link:hover {
+      background: rgba(212,175,55,0.12);
+      border-color: var(--gold);
+    }
+    .project-link svg { width: 12px; height: 12px; }
+
+    /* Featured project extras */
+    .project-card.featured .project-title { font-size: 1.4rem; }
+    .project-card.featured .project-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1.25rem;
+      background: rgba(212,175,55,0.04);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 10px;
+    }
+    .project-stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .project-stat-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.1rem;
+    }
+
+    /* ===== GITHUB ===== */
+    #github { background: var(--navy); }
+    .github-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .github-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .github-icon {
+      width: 72px; height: 72px;
+      background: rgba(212,175,55,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    .github-icon svg { width: 36px; height: 36px; fill: var(--gold); }
+    .github-username {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .github-handle {
+      font-size: 0.875rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      font-family: monospace;
+    }
+    .github-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.75rem;
+    }
+    .github-stat-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+    }
+    .github-stat-label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .pinned-repos h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .repo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .repo-item {
+      background: var(--navy);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .repo-item:hover {
+      border-color: rgba(212,175,55,0.35);
+      transform: translateX(4px);
+    }
+    .repo-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      font-family: monospace;
+    }
+    .repo-lang {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .lang-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .lang-py { background: #3776AB; }
+    .lang-sql { background: #E38D44; }
+    .lang-r { background: #276DC3; }
+
+    /* ===== EDUCATION ===== */
+    #education { background: var(--navy-mid); }
+    .edu-certs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .edu-block h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .edu-item {
+      background: var(--navy);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.85rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: all 0.2s;
+    }
+    .edu-item:hover {
+      border-color: rgba(212,175,55,0.25);
+    }
+    .edu-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .edu-degree {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+    .edu-school {
+      font-size: 0.8rem;
+      color: var(--gold);
+      margin-bottom: 0.15rem;
+    }
+    .edu-years {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .cert-item {
+      background: var(--navy);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      transition: all 0.2s;
+    }
+    .cert-item:hover {
+      border-color: rgba(212,175,55,0.25);
+      transform: translateX(3px);
+    }
+    .cert-badge {
+      width: 32px; height: 32px;
+      background: rgba(212,175,55,0.12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .cert-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .cert-issuer {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    /* ===== EXPERIENCE TIMELINE ===== */
+    #experience { background: var(--navy); }
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(212,175,55,0.1));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(212,175,55,0.06);
+    }
+    .timeline-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -2.45rem;
+      top: 0.2rem;
+      width: 14px; height: 14px;
+      background: var(--gold);
+      border-radius: 50%;
+      border: 3px solid var(--navy);
+      box-shadow: 0 0 0 2px rgba(212,175,55,0.3);
+    }
+    .timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-role {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .timeline-company {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .timeline-date {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      background: rgba(212,175,55,0.08);
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      border: 1px solid rgba(212,175,55,0.15);
+      flex-shrink: 0;
+    }
+    .timeline-bullets {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .timeline-bullets li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 0.3rem 0 0.3rem 1.25rem;
+      position: relative;
+      line-height: 1.65;
+    }
+    .timeline-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.7rem;
+      top: 0.38rem;
+    }
+
+    /* ===== CONTACT ===== */
+    #contact { background: var(--navy-mid); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .contact-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .contact-headline span { color: var(--gold); }
+    .contact-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .contact-link-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.85rem 1.25rem;
+      background: var(--navy);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-link-item:hover {
+      border-color: rgba(212,175,55,0.35);
+      transform: translateX(4px);
+    }
+    .contact-icon {
+      width: 36px; height: 36px;
+      background: rgba(212,175,55,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-link-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .contact-link-value {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    /* Open to work card */
+    .open-to-work {
+      background: var(--navy);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    .otw-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.3);
+      color: #6EE7B7;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .otw-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #6EE7B7;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    .otw-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .otw-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    .otw-list li {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .otw-list li::before {
+      content: '✓';
+      color: var(--gold);
+      font-size: 0.7rem;
+    }
+    .otw-location {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(212,175,55,0.1);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.25rem;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .fade-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-up-delay-3 { animation-delay: 0.35s; opacity: 0; }
+    .fade-up-delay-4 { animation-delay: 0.5s; opacity: 0; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero-content,
+      .about-grid,
+      .projects-grid,
+      .github-content,
+      .edu-certs-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-photo-wrap { order: -1; }
+      .hero-photo-frame { width: 260px; height: 310px; }
+      .projects-grid .project-card:first-child { grid-column: 1; }
+      .project-card.featured .project-stats { grid-template-columns: repeat(3, 1fr); }
+      .nav-links { display: none; }
+      .superpower-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#home" class="nav-logo">EN</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-content container">
+      <div>
+        <div class="hero-badge fade-up fade-up-delay-1">Available for New Opportunities</div>
+        <h1 class="hero-name fade-up fade-up-delay-2">
+          Ella <span>Ndalla</span>
+        </h1>
+        <p class="hero-title fade-up fade-up-delay-2">Data Scientist</p>
+        <p class="hero-value-prop fade-up fade-up-delay-3">
+          <strong>8+ years turning complex data into executive-level decisions.</strong>
+          Former IT Auditor at EY, Regeneron &amp; Bank of China — now applying
+          financial modeling, risk analysis &amp; machine learning to drive
+          measurable business impact.
+        </p>
+        <div class="hero-ctas fade-up fade-up-delay-3">
+          <a href="#projects" class="btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            View Projects
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Contact Me
+          </a>
+          <a href="https://github.com/EllaN12" target="_blank" class="btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/ellandalla" target="_blank" class="btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+        <div class="hero-stats fade-up fade-up-delay-4">
+          <div class="stat-item">
+            <div class="stat-number">8+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">40+</div>
+            <div class="stat-label">End-to-End Integrated Audits — Pharmaceutical Operations &amp; Finance</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">F500</div>
+            <div class="stat-label">Client Experience</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHOTO -->
+      <div class="hero-photo-wrap fade-up fade-up-delay-3">
+        <div class="hero-photo-frame">
+          <div class="hero-photo-bg"></div>
+          <div class="photo-placeholder" id="photoPlaceholder">
+            <img src="profile_processed.jpg" alt="Ella Ndalla" id="profilePhoto">
+            <div class="photo-overlay"></div>
+          </div>
+          <div class="photo-corner photo-corner-tl"></div>
+          <div class="photo-corner photo-corner-br"></div>
+          <div class="photo-badge">
+            <div class="photo-badge-icon">📊</div>
+            <div class="photo-badge-text">Analytics Expert</div>
+            <div class="photo-badge-sub">New York, NY</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">My Story</p>
+      <h2 class="section-title">Where Audit Rigor Meets<br>Data Science</h2>
+      <div class="section-line"></div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            My journey from <strong>IT Audit professional to Data Scientist</strong> wasn't a pivot —
+            it was a natural evolution. Spending years inside companies like EY, Regeneron, and Bank of China,
+            I was already doing the work: interrogating data, finding anomalies, quantifying risk, and
+            translating findings into boardroom-ready narratives.
+          </p>
+          <p>
+            What I discovered is that <strong>audit instincts are data science superpowers.</strong>
+            The same skepticism that uncovers a $6M vendor payment error is what surfaces model bias.
+            The same rigor behind a zero-findings compliance audit is what ensures reproducible analysis.
+          </p>
+          <p>
+            Today I combine <strong>Python, machine learning, and causal inference</strong> with
+            deep domain expertise in financial services and healthcare to build analytics from the ground up.
+          </p>
+          <p>
+            Based in New York, open to roles in <strong>data science, analytics engineering,
+            and AI-first marketing measurement.</strong>
+          </p>
+          <div style="margin-top:2rem;">
+            <a href="#contact" class="btn-primary" style="display:inline-flex;">
+              Let's Connect →
+            </a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Audit Skills → Data Science Superpowers</p>
+          <div class="superpower-grid">
+            <div class="superpower-card">
+              <div class="sp-icon">📐</div>
+              <div class="sp-title">Risk Analysis</div>
+              <div class="sp-desc">Statistical thinking &amp; uncertainty quantification — not just finding bugs, but measuring their probability.</div>
+            </div>
+            <div class="superpower-card">
+              <div class="sp-icon">🔍</div>
+              <div class="sp-title">Data Validation</div>
+              <div class="sp-desc">Years of reconciliation work translate directly to expert-level data quality &amp; cleaning pipelines.</div>
+            </div>
+            <div class="superpower-card">
+              <div class="sp-icon">⚙️</div>
+              <div class="sp-title">Process Improvements &amp; Documentation</div>
+              <div class="sp-desc">Reproducible research, workflow documentation, and end-to-end pipeline automation — turning manual processes into scalable, audit-ready systems.</div>
+            </div>
+            <div class="superpower-card">
+              <div class="sp-icon">⚖️</div>
+              <div class="sp-title">Regulatory Compliance</div>
+              <div class="sp-desc">HIPAA, GDPR, FFIEC, GxP (Good Variable Practices) — a deep foundation for ethical AI and responsible data governance.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Technical Toolkit</p>
+      <h2 class="section-title">Skills &amp; Expertise</h2>
+      <div class="section-line"></div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">⚡ Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag highlight">Python</span>
+            <span class="skill-tag highlight">SQL</span>
+            <span class="skill-tag highlight">NoSQL</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">CSS</span>
+            <span class="skill-tag">PySpark</span>
+            <span class="skill-tag">Spark</span>
+            <span class="skill-tag">Hadoop</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">📚 Libraries &amp; Frameworks</div>
+          <div class="skill-tags">
+            <span class="skill-tag highlight">Pandas</span>
+            <span class="skill-tag highlight">NumPy</span>
+            <span class="skill-tag highlight">Scikit-learn</span>
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">Seaborn</span>
+            <span class="skill-tag">Statsmodels</span>
+            <span class="skill-tag">BeautifulSoup</span>
+            <span class="skill-tag">PyMC</span>
+            <span class="skill-tag">H2O</span>
+            <span class="skill-tag">Plotly</span>
+            <span class="skill-tag">Regex</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">🧠 ML &amp; Analytics</div>
+          <div class="skill-tags">
+            <span class="skill-tag highlight">Machine Learning</span>
+            <span class="skill-tag">EDA</span>
+            <span class="skill-tag">A/B Testing</span>
+            <span class="skill-tag">Time Series</span>
+            <span class="skill-tag">Causal Inference</span>
+            <span class="skill-tag">Deep Learning</span>
+            <span class="skill-tag">LTV Analysis</span>
+            <span class="skill-tag">Attribution Modeling</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">📊 BI &amp; Visualization</div>
+          <div class="skill-tags">
+            <span class="skill-tag highlight">Tableau</span>
+            <span class="skill-tag">Streamlit</span>
+            <span class="skill-tag">Executive Dashboards</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">☁️ Cloud &amp; Infrastructure</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Google Cloud</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">ETL Pipelines</span>
+            <span class="skill-tag">CI/CD</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">🏛️ Audit Crossover</div>
+          <div class="skill-tags">
+            <span class="skill-tag highlight">Data Governance</span>
+            <span class="skill-tag">Internal Controls</span>
+            <span class="skill-tag">ICFR / FFIEC</span>
+            <span class="skill-tag">HIPAA / GDPR / GxP</span>
+            <span class="skill-tag">Risk Frameworks</span>
+            <span class="skill-tag">Ethical AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Featured Work</p>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+      <div class="projects-grid">
+
+        <!-- Project 1: Featured -->
+        <div class="project-card featured">
+          <div class="project-meta">
+            <div class="project-number">01</div>
+            <span class="project-category">Causal Inference</span>
+          </div>
+          <h3 class="project-title">Causal Attribution Analytics — Marketing Performance Measurement</h3>
+          <p class="project-problem">
+            Designed an end-to-end causal attribution framework integrating <strong>9 data sources</strong>
+            into a 31K+ row analytical dataset. Built a formal causal graph to move beyond correlation
+            and identify true performance drivers — enabling evidence-based investment recommendations
+            applicable to advertiser measurement challenges.
+          </p>
+          <div class="project-stats">
+            <div>
+              <div class="project-stat-val">82.8%</div>
+              <div class="project-stat-label">R² Accuracy</div>
+            </div>
+            <div>
+              <div class="project-stat-val">9</div>
+              <div class="project-stat-label">Data Sources</div>
+            </div>
+            <div>
+              <div class="project-stat-val">7</div>
+              <div class="project-stat-label">Treatment Variables</div>
+            </div>
+          </div>
+          <div class="project-impact">
+            <span class="impact-chip gold">Shapley Value Decomposition</span>
+            <span class="impact-chip gold">OLS Regression</span>
+            <span class="impact-chip gold">Backdoor-Adjusted Causal Estimation</span>
+            <span class="impact-chip">Executive Presentation</span>
+          </div>
+          <div class="project-methods">
+            <span class="method-tag">Python</span>
+            <span class="method-tag">DoWhy</span>
+            <span class="method-tag">Pandas</span>
+            <span class="method-tag">Statsmodels</span>
+            <span class="method-tag">NetworkX</span>
+            <span class="method-tag">Matplotlib</span>
+            <span class="method-tag">Beautiful Soup</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/EllaN12/Causal_inference-Case_study" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub Repo
+            </a>
+            <a href="Causal_Inference_Case_Study.pptx" download class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download Slides
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-meta">
+            <div class="project-number">02</div>
+            <span class="project-category">Predictive Modeling</span>
+          </div>
+          <h3 class="project-title">Email Lead Scoring &amp; Marketing Cost Optimization</h3>
+          <p class="project-problem">
+            Analyzed engagement, purchase behavior, and campaign response across a <strong>100K+ subscriber</strong>
+            base. Built an H2O AutoML stacked ensemble lead scoring model and engineered financial models
+            to optimize marketing spend — eliminating wasteful sends without sacrificing revenue.
+          </p>
+          <div class="project-impact">
+            <span class="impact-chip gold">$180K in Sales Retained</span>
+            <span class="impact-chip gold">$214K Monthly Revenue</span>
+            <span class="impact-chip">30% Email Volume Reduction</span>
+            <span class="impact-chip">$33K Operational Savings</span>
+          </div>
+          <div class="project-methods">
+            <span class="method-tag">Python</span>
+            <span class="method-tag">H2O AutoML</span>
+            <span class="method-tag">Scikit-learn</span>
+            <span class="method-tag">SQLite</span>
+            <span class="method-tag">Streamlit</span>
+            <span class="method-tag">FastAPI</span>
+          </div>
+          <div class="project-links">
+            <a href="https://frontend-els-741818216556.us-central1.run.app/" target="_blank" class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Live Demo
+            </a>
+            <a href="https://github.com/EllaN12/els-backend" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub Repo
+            </a>
+            <a href="Email_Lead_Scoring_Project_Summary.pptx" download class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download Slides
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <div class="project-meta">
+            <div class="project-number">03</div>
+            <span class="project-category">Customer Analytics</span>
+          </div>
+          <h3 class="project-title">Customer Churn Prediction &amp; Causal Retention Framework</h3>
+          <p class="project-problem">
+            End-to-end pipeline from raw telco CRM data to GCP Cloud Run deployment — combining
+            ML prediction, causal validation, Bayesian experimental design, and production monitoring
+            to quantify churn risk and prescribe targeted retention strategies.
+          </p>
+          <div class="project-impact">
+            <span class="impact-chip gold">20% Attrition Reduction</span>
+            <span class="impact-chip gold">GCP Cloud Run Deployed</span>
+            <span class="impact-chip">H2O AutoML + PyMC</span>
+            <span class="impact-chip">MLflow Tracked</span>
+          </div>
+          <div class="project-methods">
+            <span class="method-tag">Python</span>
+            <span class="method-tag">PySpark</span>
+            <span class="method-tag">H2O AutoML</span>
+            <span class="method-tag">PyMC</span>
+            <span class="method-tag">MLflow</span>
+            <span class="method-tag">Docker</span>
+            <span class="method-tag">GCP</span>
+          </div>
+          <div class="project-links">
+            <a href="https://bayesian-dashboard-303092178542.us-central1.run.app" target="_blank" class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Live Demo
+            </a>
+            <a href="https://github.com/EllaN12/Customer_Churn_Analysis" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub Repo
+            </a>
+            <a href="Customer_Churn_Final.pptx" download class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download Slides
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card featured">
+          <div class="project-meta">
+            <div class="project-number">04</div>
+            <span class="project-category">Unsupervised Learning</span>
+          </div>
+          <h3 class="project-title">Analysis of the US Rental Market — Segmentation &amp; Interactive Dashboard</h3>
+          <p class="project-problem">
+            Explored the U.S. apartment rental landscape across <strong>99,189 listings</strong> (UCI ML Repository)
+            to identify distinct market segments and their defining characteristics — combining clustering,
+            dimensionality reduction, and an interactive Streamlit dashboard for stakeholder exploration.
+          </p>
+          <div class="project-stats">
+            <div>
+              <div class="project-stat-val">99%</div>
+              <div class="project-stat-label">XGBoost Accuracy</div>
+            </div>
+            <div>
+              <div class="project-stat-val">62%</div>
+              <div class="project-stat-label">PCA Variance Explained</div>
+            </div>
+            <div>
+              <div class="project-stat-val">99K+</div>
+              <div class="project-stat-label">Records Analyzed</div>
+            </div>
+          </div>
+          <div class="project-impact">
+            <span class="impact-chip gold">Cluster 0: Essential Rentals — 82% of Market (avg. $1,550/mo)</span>
+            <span class="impact-chip gold">Cluster 1: Amenity-Packed — 18% of Market (avg. $1,415/mo)</span>
+            <span class="impact-chip">KMeans + PCA: 2 Segments Identified</span>
+            <span class="impact-chip">Live Interactive Dashboard</span>
+          </div>
+          <div class="project-methods">
+            <span class="method-tag">Python</span>
+            <span class="method-tag">Pandas / NumPy</span>
+            <span class="method-tag">Scikit-learn</span>
+            <span class="method-tag">KMeans Clustering</span>
+            <span class="method-tag">PCA</span>
+            <span class="method-tag">PyCaret</span>
+            <span class="method-tag">XGBoost</span>
+            <span class="method-tag">Streamlit</span>
+          </div>
+          <div class="project-links">
+            <a href="https://ellan12-us-rental-market-srcapp-ujvkpx.streamlit.app/" target="_blank" class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Live Demo
+            </a>
+            <a href="https://github.com/EllaN12/US_Rental_Market" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub Repo
+            </a>
+            <a href="Analysis of Us Rental Market.pptx" download class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download Slides
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card">
+          <div class="project-meta">
+            <div class="project-number">05</div>
+            <span class="project-category">Time Series Forecasting</span>
+          </div>
+          <h3 class="project-title">Bikes Sales Forecast — AutoARIMA vs. LSTM Deep Learning</h3>
+          <p class="project-problem">
+            Analyzed 5 years of bike shop sales data (109,514 order lines across 93 U.S. stores)
+            to assess Q1–Q3 2024 performance and forecast Q4 demand. Benchmarked classical
+            AutoARIMA against a tuned TensorFlow LSTM to determine the better production-ready forecaster.
+          </p>
+          <div class="project-impact">
+            <span class="impact-chip gold">LSTM MAPE: 0.236</span>
+            <span class="impact-chip gold">AutoARIMA MAPE: 0.246</span>
+            <span class="impact-chip">Mountain Bikes: #1 Category Nationwide</span>
+            <span class="impact-chip">Tableau Public Dashboard</span>
+          </div>
+          <div class="project-methods">
+            <span class="method-tag">Python</span>
+            <span class="method-tag">TensorFlow / Keras</span>
+            <span class="method-tag">AutoARIMA</span>
+            <span class="method-tag">Keras Tuner</span>
+            <span class="method-tag">Pandas</span>
+            <span class="method-tag">SQLite</span>
+            <span class="method-tag">Tableau</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/EllaN12/Bikes_forecast" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub Repo
+            </a>
+            <a href="https://public.tableau.com/app/profile/ella.claude/viz/BikesslaesForecast/Story1" target="_blank" class="project-link" style="background:rgba(212,175,55,0.08);border-color:rgba(212,175,55,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Tableau Dashboard
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE - HIDDEN
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Career History</p>
+      <h2 class="section-title">Work Experience</h2>
+      <div class="section-line"></div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role">Data Scientist | AI Evaluator | Analytics Volunteer Lead</div>
+              <div class="timeline-company">Freelance &amp; Continuous Education</div>
+            </div>
+            <div class="timeline-date">Sep 2024 – Present</div>
+          </div>
+          <ul class="timeline-bullets">
+            <li><strong>AfterQuery:</strong> Evaluated Large Language Models across post-training and fine-tuning phases, developing hands-on expertise in AI solution assessment directly applicable to advising clients on AI-first marketing strategies.</li>
+            <li><strong>Impact Christian Center (Volunteer):</strong> Engineered ETL and email parsing pipeline automation that compressed financial reporting from <strong>30 days → 4 days</strong> and reduced team overhead from 5 to 1 — delivering a 5x productivity gain.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role">Consultant — IT Audit Lead Auditor</div>
+              <div class="timeline-company">Bank of China U.S.A.</div>
+            </div>
+            <div class="timeline-date">Jan 2023 – Jun 2023</div>
+          </div>
+          <ul class="timeline-bullets">
+            <li>Led a team of two auditors implementing FFIEC-compliant application controls testing frameworks, reducing organizational risk exposure by <strong>40%</strong> and driving a <strong>30% efficiency improvement</strong> through redesigned IT audit workflows for a $4B AUM institution.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role">Senior IT Auditor</div>
+              <div class="timeline-company">Regeneron Pharmaceuticals</div>
+            </div>
+            <div class="timeline-date">Mar 2016 – Jan 2022</div>
+          </div>
+          <ul class="timeline-bullets">
+            <li>Led the IT control assessment program achieving a <strong>95% audit recommendation implementation rate</strong> as a trusted analytical partner to C-suite executives and the Audit Committee.</li>
+            <li>Applied advanced financial analytics to recover <strong>$6M in erroneous vendor payments</strong> and <strong>$1M in unsubmitted billable time</strong> from operational datasets.</li>
+            <li>Designed a cross-functional data classification framework that produced <strong>zero findings in all subsequent external audits</strong>.</li>
+            <li>Conducted media analytics audits evaluating digital content performance against HIPAA and GDPR standards.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role">Risk Assurance Supervisory Staff</div>
+              <div class="timeline-company">EY Advisory</div>
+            </div>
+            <div class="timeline-date">Jul 2012 – Jul 2015</div>
+          </div>
+          <ul class="timeline-bullets">
+            <li>Executed ICFR IT assurance and third-party reporting engagements for Fortune 500 clients across financial services, healthcare, and technology — building executive communication and data-driven advisory capabilities.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-role">Analyst</div>
+              <div class="timeline-company">Earlier Career</div>
+            </div>
+            <div class="timeline-date">Mar 2007 – Jun 2012</div>
+          </div>
+          <ul class="timeline-bullets">
+            <li>Asset Management Junior Analyst at Asta Funding (1 yr 8 mo)</li>
+            <li>Economic &amp; Research Associate at Haver Analytics (1 yr)</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  EXPERIENCE HIDDEN -->
+
+  <!-- GITHUB -->
+  <section id="github">
+    <div class="container">
+      <p class="section-label">Open Source</p>
+      <h2 class="section-title">GitHub</h2>
+      <div class="section-line"></div>
+      <div class="github-content">
+        <div class="github-card">
+          <div class="github-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </div>
+          <div class="github-username">Ella Ndalla</div>
+          <div class="github-handle">github.com/EllaN12</div>
+          <div class="github-stats">
+            <div>
+              <div class="github-stat-val">3+</div>
+              <div class="github-stat-label">Projects</div>
+            </div>
+            <div>
+              <div class="github-stat-val">Python</div>
+              <div class="github-stat-label">Top Language</div>
+            </div>
+          </div>
+          <a href="https://github.com/EllaN12" target="_blank" class="btn-primary" style="width:100%;justify-content:center;">
+            View GitHub Profile →
+          </a>
+        </div>
+
+        <div>
+          <div class="pinned-repos">
+            <h3>📌 Pinned Repositories</h3>
+            <div class="repo-list">
+              <a href="https://github.com/EllaN12/US_Rental_Market" target="_blank" class="repo-item">
+                <span class="repo-name">US_Rental_Market</span>
+                <span class="repo-lang"><span class="lang-dot lang-py"></span>Python</span>
+              </a>
+              <a href="https://github.com/EllaN12/HomeSales" target="_blank" class="repo-item">
+                <span class="repo-name">HomeSales</span>
+                <span class="repo-lang"><span class="lang-dot lang-py"></span>Python · SQL</span>
+              </a>
+              <a href="https://github.com/EllaN12/nosql-challenge" target="_blank" class="repo-item">
+                <span class="repo-name">nosql-challenge</span>
+                <span class="repo-lang"><span class="lang-dot lang-py"></span>Python · NoSQL</span>
+              </a>
+              <a href="https://github.com/EllaN12/leaflet-challenge" target="_blank" class="repo-item">
+                <span class="repo-name">leaflet-challenge</span>
+                <span class="repo-lang"><span class="lang-dot" style="background:#f7df1e;"></span>JavaScript</span>
+              </a>
+              <a href="https://github.com/EllaN12/SQL" target="_blank" class="repo-item">
+                <span class="repo-name">SQL</span>
+                <span class="repo-lang"><span class="lang-dot" style="background:#e38c00;"></span>SQL</span>
+              </a>
+              <a href="https://github.com/EllaN12/offering" target="_blank" class="repo-item">
+                <span class="repo-name">Offering - ETL Project</span>
+                <span class="repo-lang"><span class="lang-dot lang-py"></span>Python</span>
+              </a>
+            </div>
+          </div>
+          <div style="margin-top:1.75rem;padding:1.25rem;background:var(--navy-mid);border:1px solid rgba(212,175,55,0.12);border-radius:12px;">
+            <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.7;">
+              💡 Each repo includes a detailed <strong style="color:var(--text);">README</strong> with problem statement, methodology, key findings, and business impact — written for both technical reviewers and executive stakeholders.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <p class="section-label">Credentials</p>
+      <h2 class="section-title">Education &amp; Certifications</h2>
+      <div class="section-line"></div>
+      <div class="edu-certs-grid">
+        <div class="edu-block">
+          <h3>🎓 Degrees</h3>
+          <div class="edu-item">
+            <div class="edu-icon">🏛️</div>
+            <div>
+              <div class="edu-degree">Master of Business Administration (M.B.A.)</div>
+              <div class="edu-school">Pace University</div>
+              <div class="edu-years">Finance &amp; Information Systems · New York, NY</div>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon">📐</div>
+            <div>
+              <div class="edu-degree">Bachelor of Science, Finance</div>
+              <div class="edu-school">Siena College</div>
+              <div class="edu-years">Loudonville, NY</div>
+            </div>
+          </div>
+
+          <h3 style="margin-top:2rem;">🏆 Professional Activities</h3>
+          <div class="edu-item">
+            <div class="edu-icon">👥</div>
+            <div>
+              <div class="edu-degree">Team Lead</div>
+              <div class="edu-school">Data for Good: Regeneron Data Analytics Pro Bono Program</div>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon">🌐</div>
+            <div>
+              <div class="edu-degree">Communication Co-Chair</div>
+              <div class="edu-school">EY Intercultural Exchange Professional Network (ICE PN)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-block">
+          <h3>📜 Certifications</h3>
+          <div class="cert-item">
+            <div class="cert-badge">🤖</div>
+            <div>
+              <div class="cert-name">Machine Learning Specialization</div>
+              <div class="cert-issuer">Stanford Online / Coursera</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">📊</div>
+            <div>
+              <div class="cert-name">Applied Statistics in Python</div>
+              <div class="cert-issuer">DataCamp</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">🐍</div>
+            <div>
+              <div class="cert-name">Python for Machine Learning &amp; API</div>
+              <div class="cert-issuer">Business Science University</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">🗄️</div>
+            <div>
+              <div class="cert-name">SQL for Business Analysis</div>
+              <div class="cert-issuer">DataCamp</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">🛡️</div>
+            <div>
+              <div class="cert-name">CISA — Certified Information Systems Auditor</div>
+              <div class="cert-issuer">ISACA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="section-label">Get In Touch</p>
+          <h2 class="contact-headline">Let's Build<br>Something <span>Together</span></h2>
+          <p class="contact-text">
+            I'm actively exploring senior data science, analytics engineering, and
+            AI-first measurement roles — especially at the intersection of
+            <strong>finance, marketing analytics, and responsible AI.</strong>
+            Let's talk.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:ndallaella@gmail.com" class="contact-link-item">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <div class="contact-link-label">Email</div>
+                <div class="contact-link-value">ndallaella@gmail.com</div>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/ellandalla" target="_blank" class="contact-link-item">
+              <div class="contact-icon">💼</div>
+              <div>
+                <div class="contact-link-label">LinkedIn</div>
+                <div class="contact-link-value">linkedin.com/in/ellandalla</div>
+              </div>
+            </a>
+            <a href="https://github.com/EllaN12" target="_blank" class="contact-link-item">
+              <div class="contact-icon">⚡</div>
+              <div>
+                <div class="contact-link-label">GitHub</div>
+                <div class="contact-link-value">github.com/EllaN12</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="open-to-work">
+          <div class="otw-badge">Open to Work</div>
+          <div class="otw-location">
+            📍 New York, NY · Open to Remote / Hybrid
+          </div>
+          <div style="margin-top:1.5rem;">
+            <a href="mailto:ndallaella@gmail.com" class="btn-primary" style="width:100%;justify-content:center;">
+              Send Me a Message →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Ella Ndalla</div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 Ella Ndalla · Data Scientist · New York, NY</div>
+  </footer>
+
+  <!-- PHOTO SWAP SCRIPT -->
+  <script>
+    // To add your profile photo:
+    // 1. Place your photo file (e.g. "profile.jpg") in the same folder as this HTML file
+    // 2. Uncomment the lines below and update the filename
+    //
+    // const placeholder = document.getElementById('photoPlaceholder');
+    // placeholder.innerHTML = `
+    //   <img src="profile.jpg" alt="Ella Ndalla" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:14px;filter:contrast(1.08) brightness(0.95) saturate(0.85);">
+    //   <div class="photo-overlay"></div>
+    // `;
+
+    // Smooth scroll for nav
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Nav active state on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--gold)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
