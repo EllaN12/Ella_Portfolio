@@ -2,7 +2,7 @@
 
 Personal portfolio site for Ella Ndalla, Senior Data Scientist & Analytical Lead.
 
-**Live site:** https://EllaN12.github.io/ella-ndalla-portfolio
+**Live site:** https://ellan12.github.io/Ella_Portfolio/
 
 ## Stack
 - Pure HTML/CSS/JS — no build step required
