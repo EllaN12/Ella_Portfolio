@@ -1540,6 +1540,125 @@
           </div>
         </div>
 
+        <!-- Project 6: Featured -->
+        <div class="project-card featured">
+          <div class="project-meta">
+            <div class="project-number">06</div>
+            <span class="project-category">Anomaly &amp; Fraud Detection</span>
+          </div>
+          <h3 class="project-title">Credit Card Fraud Detection — Anomaly Detection on Extreme Class Imbalance</h3>
+          <p class="project-problem">
+            Built an end-to-end fraud analytics pipeline on the ULB credit card dataset —
+            <strong>284,807 transactions</strong> with only 492 fraud cases (a <strong>577:1 imbalance</strong>).
+            Benchmarked unsupervised IsolationForest against SMOTE-balanced Random Forest, replaced misleading
+            ROC AUC with PR AUC, ranked all 28 PCA features by an objective discrimination score, and validated
+            stability with walk-forward temporal cross-validation and PSI drift monitoring.
+          </p>
+          <div class="project-stats">
+            <div>
+              <div class="project-stat-val">0.907</div>
+              <div class="project-stat-label">SMOTE + RF F1</div>
+            </div>
+            <div>
+              <div class="project-stat-val">87.6%</div>
+              <div class="project-stat-label">Fraud Recall</div>
+            </div>
+            <div>
+              <div class="project-stat-val">577:1</div>
+              <div class="project-stat-label">Class Imbalance</div>
+            </div>
+          </div>
+          <div class="project-impact">
+            <span class="impact-chip gold">SMOTE + RF: F1 0.907 · Recall 0.876</span>
+            <span class="impact-chip gold">PR AUC over ROC AUC for Honest Evaluation</span>
+            <span class="impact-chip">V14 Auto-Selected (8.94σ Separation)</span>
+            <span class="impact-chip">Walk-Forward Temporal Validation + PSI Drift</span>
+          </div>
+          <div class="project-methods">
+            <span class="method-tag">Python</span>
+            <span class="method-tag">Scikit-learn</span>
+            <span class="method-tag">IsolationForest</span>
+            <span class="method-tag">SMOTE / imbalanced-learn</span>
+            <span class="method-tag">Random Forest</span>
+            <span class="method-tag">Pandas / NumPy</span>
+            <span class="method-tag">SciPy</span>
+            <span class="method-tag">Statsmodels</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/EllaN12/Anomaly_and_Fraud_Detection" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub Repo
+            </a>
+            <a href="credit_card_fraud_detection.pptx" download class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download Slides
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 7: Featured -->
+        <div class="project-card featured">
+          <div class="project-meta">
+            <div class="project-number">07</div>
+            <span class="project-category">Causal Inference &amp; Data Engineering</span>
+          </div>
+          <h3 class="project-title">FinLens — Measuring the Lending Impact of Consumer Privacy Laws</h3>
+          <p class="project-problem">
+            End-to-end regulatory analytics platform quantifying the causal effect of state consumer
+            data-privacy laws (<strong>CCPA, VCDPA, CPA</strong>) on mortgage lending. Merged <strong>HMDA Loan
+            Application Register</strong> data (CFPB, 2018–2024) with <strong>FRED</strong> macro series across 7 states,
+            modeled through a BigQuery + dbt warehouse orchestrated by Airflow, and surfaced through a
+            Streamlit decision app — isolating regulatory effects on approval rates, loan amounts, and
+            real-estate investor ROI.
+          </p>
+          <div class="project-stats">
+            <div>
+              <div class="project-stat-val">5</div>
+              <div class="project-stat-label">Causal Scenarios (DiD → Causal ML)</div>
+            </div>
+            <div>
+              <div class="project-stat-val">7</div>
+              <div class="project-stat-label">States · 2018–2024 HMDA + FRED</div>
+            </div>
+            <div>
+              <div class="project-stat-val">−1.8pp</div>
+              <div class="project-stat-label">CA Investor Rate Shift (DiD)</div>
+            </div>
+          </div>
+          <div class="project-impact">
+            <span class="impact-chip gold">Standard 2×2 DiD: +3.45pp Approval (p=0.35, n.s.)</span>
+            <span class="impact-chip gold">Staggered DiD (Callaway &amp; Sant'Anna) ATT(g,t)</span>
+            <span class="impact-chip">Event Study · Triple DiD · Synthetic Control · CausalForest HTE</span>
+            <span class="impact-chip">BigQuery + dbt + Airflow Pipeline → Streamlit on Cloud Run</span>
+          </div>
+          <div class="project-methods">
+            <span class="method-tag">Python</span>
+            <span class="method-tag">BigQuery</span>
+            <span class="method-tag">dbt</span>
+            <span class="method-tag">Airflow</span>
+            <span class="method-tag">Statsmodels</span>
+            <span class="method-tag">EconML (CausalForest)</span>
+            <span class="method-tag">Scikit-learn</span>
+            <span class="method-tag">Plotly</span>
+            <span class="method-tag">Streamlit</span>
+            <span class="method-tag">Docker / GCP Cloud Run</span>
+          </div>
+          <div class="project-links">
+            <a href="https://finlens-app-360526413047.us-central1.run.app/" target="_blank" class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Live Demo
+            </a>
+            <a href="https://github.com/EllaN12/Finlens" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub Repo
+            </a>
+            <a href="FinLens_Presentation.pptx" download class="project-link" style="border-color:rgba(240,208,96,0.4);color:var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download Slides
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
